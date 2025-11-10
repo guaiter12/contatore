@@ -3,6 +3,7 @@ public class Counter {
 
     public synchronized void increment() {
         count++;
+        //devo fare un ciclo
     }
 
     public int getCount() {
