@@ -1,11 +1,15 @@
 
 public class Main {
     public static void main(String[] args) {
-        Counter counter = new Counter();
+        CounterSynchronized c1 = new CounterSynchronized();
+        Counter c2 = new Counter();
 
-        // Create multiple threads to increment the counter
-        Thread t1 = new Thread(() -> counter.increment());
-        Thread t2 = new Thread(() -> counter.increment());
+
+
+        Thread t1 = new Thread(() -> c1.increment());
+        Thread t2 = new Thread(() -> c1.increment());
+        Thread t3 = new Thread(() -> c2.increment());
+        Thread t4 = new Thread(() -> c2.increment());
 
         t1.start();
         t2.start();
@@ -17,7 +21,16 @@ public class Main {
             e.printStackTrace();
         }
 
-        System.out.println("Final count: " + counter.getCount());
-    }
+        t3.start();
+        t4.start();
 
+        try {
+            t3.join();
+            t4.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+    }
 }
+
