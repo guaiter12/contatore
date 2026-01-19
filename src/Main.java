@@ -1,10 +1,9 @@
 
 public class Main {
+
     public static void main(String[] args) {
         CounterSynchronized c1 = new CounterSynchronized();
         Counter c2 = new Counter();
-
-
 
         Thread t1 = new Thread(() -> c1.increment());
         Thread t2 = new Thread(() -> c1.increment());
@@ -31,6 +30,8 @@ public class Main {
             e.printStackTrace();
         }
 
+        System.out.println(c1.getCount());
+        System.out.println(c2.getCount());
     }
 }
 
